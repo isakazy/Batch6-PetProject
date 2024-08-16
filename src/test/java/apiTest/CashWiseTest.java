@@ -1,5 +1,4 @@
 package apiTest;
-
 import antities.RequestBody;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -32,15 +31,15 @@ public class CashWiseTest {
        int statusCode = response.statusCode();
        Assert.assertEquals(200, statusCode);
        response.prettyPrint();
-       email = response.jsonPath().getString("jwt_token");
-        System.out.println(email);
+       String token = response.jsonPath().getString("jwt_token");
+        System.out.println(token);
     }
 
 
     // get single selle, talk about jsonPath, talk about verification
     @Test
     public void getSingleSeller(){
-        String url = Config.getProperty("cashWiseApiUrl") + "/api/myaccount/sellers/" + 4710;
+        String url = Config.getProperty("cashWiseApiUrl") + "/api/myaccount/sellers/" + 1212;
         String token = CashWiseAuthorization.getToken();
 
        Response response = RestAssured.given().auth().oauth2(token).get(url);
@@ -142,14 +141,17 @@ public class CashWiseTest {
 
     }
 
+
+
     // Create a seller and verify the seller ID
+    // start here as a warmup
     @Test
     public void CreateSeller() {
         RequestBody requestBody = new RequestBody();
 
         requestBody.setCompany_name("tableTennis#1 ");
         requestBody.setSeller_name("isakazyBestCoach ");
-        requestBody.setEmail("tabOe@gmail.com"); // the id has to be unique
+        requestBody.setEmail("tabe@gmail.com"); // the id has to be unique
         requestBody.setPhone_number("3127795529");
         requestBody.setAddress("9790WestHigginsRoad");
 
@@ -163,6 +165,7 @@ public class CashWiseTest {
         Assert.assertEquals(201, statusCode);
 
         String id = response.jsonPath().getString("seller_id");
+        Assert.assertFalse(id.isEmpty());
         String email = response.jsonPath().getString("email");
         Assert.assertFalse(email.isEmpty());
 

@@ -1,7 +1,7 @@
 Feature: test seller api
 
 
-  @VerifySingleSellerEmail @regression
+  @VerifySingleSellerEmail 
     Scenario: Get single seller and verify seller first name is not empty
     Given user hits get single seller api with "/api/myaccount/sellers/4710"
     Then verify seller first name is not empty
@@ -29,7 +29,7 @@ Feature: test seller api
     Then hit get all sellers and verify the seller was archived "/api/myaccount/sellers"
 
 
-  @CreateGetDeleteSeller @regression
+  @CreateGetDeleteSeller 
   Scenario: Create a seller, verify seller was created and delete the same seller
     Given user hits create seller api with "/api/myaccount/sellers/"
     Then  verify user id is generated

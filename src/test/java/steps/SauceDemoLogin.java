@@ -7,7 +7,7 @@ import pages.SauceDemoLoginPage;
 import utilities.Config;
 import utilities.Driver;
 
-public class sauceDemoLogin {
+public class SauceDemoLogin {
 
     SauceDemoLoginPage sauceDemoLoginPage = new SauceDemoLoginPage();
 
